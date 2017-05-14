@@ -19,23 +19,19 @@ public class ClientThread implements Runnable {
 		try {
 			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-			
+
 			while (true) {
 				String clientSentence = inFromClient.readLine();
-				System.out.println(clientSentence + System.lineSeparator());
+				System.out.println("-----------------------\n" + clientSentence + "-------------------------------");
 				
-				outToClient.writeBytes("ok" + "\n");
-				if (clientSentence.toLowerCase().trim().equals("exit")) {
-					System.out.println("exiting...");
-					break;
-				}
+				String message = Protocol.execute(clientSentence);
+				if (message == null)
+					System.out.println("error to parse command.");
+				else
+					outToClient.writeBytes(message + "\n");
 			}
-			
-			inFromClient.close();
-			outToClient.close();
 		} catch (IOException e) {
-			System.out.println("error on client thread. exiting.");
-			e.printStackTrace();
+			System.out.println("client disconnected. closing thread.");
 		}
 
 	}
