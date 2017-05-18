@@ -19,7 +19,7 @@ public class DownloadFile extends Command {
 		// get the second line by index 1
 		String filePath = fields[1];
 		// get the value after ':'. see protocol
-		filePath = filePath.substring(filePath.indexOf(":") + 1);
+		filePath = filePath.substring(filePath.indexOf(":") + 1).trim();
 
 		File file = new File(filePath);
 		// if file don't exists, return message path don't exists
