@@ -38,6 +38,9 @@ public class Register extends Command {
 				//System.out.println("Failed to create directory!");
 			}
 		}
+		else {
+			return ResponseCode.ERROR_USER_EXISTS.toString();
+		}
 
 
 		return null;

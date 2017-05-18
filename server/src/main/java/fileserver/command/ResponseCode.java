@@ -25,6 +25,18 @@ public enum ResponseCode {
 		public int getResponseCode() {
 			return 1;
 		}
+	},
+	
+	ERROR_USER_EXISTS {
+		@Override
+		public String toString() {
+			return getResponseCode() + "error: user exists";
+		}
+
+		@Override
+		public int getResponseCode() {
+			return 2;
+		}
 	};
 	
 	public abstract int getResponseCode();
