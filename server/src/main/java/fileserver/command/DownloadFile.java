@@ -14,17 +14,20 @@ public class DownloadFile extends Command {
 
 	@Override
 	public String run() {
+		// split by line break. be clear
 		String[] fields = clientData.split("\n");
+		// get the second line by index 1
 		String filePath = fields[1];
+		// get the value after ':'. see protocol
 		filePath = filePath.substring(filePath.indexOf(":") + 1);
 
 		File file = new File(filePath);
+		// if file don't exists, return message path don't exists
 		if (!file.exists() || file.isDirectory()) {
 			return ResponseCode.PATH_DONT_EXISTS.toString();
 		}
 
 		byte[] fileBytes;
-
 		try {
 			fileBytes = FileUtils.readFileToByteArray(file);
 		} catch (IOException e1) {
