@@ -37,6 +37,30 @@ public enum ResponseCode {
 		public int getResponseCode() {
 			return 2;
 		}
+	},
+	
+	FILE_UPLOADED_SUCCSESSFULLY {
+		@Override
+		public String toString() {
+			return getResponseCode() + "file uploaded successfully";
+		}
+
+		@Override
+		public int getResponseCode() {
+			return 6;
+		}
+	},
+	
+	FILE_FOUND {
+		@Override
+		public String toString() {
+			return getResponseCode() + "file found";
+		}
+
+		@Override
+		public int getResponseCode() {
+			return 9;
+		}
 	};
 	
 	public abstract int getResponseCode();
