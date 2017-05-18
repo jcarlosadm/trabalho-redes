@@ -18,7 +18,7 @@ public enum ResponseCode {
 	REGISTERED {
 		@Override
 		public String toString() {
-			return "registered";
+			return getResponseCode() + "registered";
 		}
 
 		@Override
