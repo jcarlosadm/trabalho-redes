@@ -6,7 +6,7 @@ public enum ResponseCode {
 	COMMAND_NOT_FOUND {
 		@Override
 		public String toString() {
-			return "error: command not found";
+			return getResponseCode() + " error: command not found";
 		}
 
 		@Override
@@ -18,7 +18,7 @@ public enum ResponseCode {
 	REGISTERED {
 		@Override
 		public String toString() {
-			return getResponseCode() + "registered";
+			return getResponseCode() + " registered";
 		}
 
 		@Override
@@ -30,7 +30,7 @@ public enum ResponseCode {
 	ERROR_USER_EXISTS {
 		@Override
 		public String toString() {
-			return getResponseCode() + "error: user exists";
+			return getResponseCode() + " error: user exists";
 		}
 
 		@Override
@@ -42,7 +42,7 @@ public enum ResponseCode {
 	FILE_UPLOADED_SUCCSESSFULLY {
 		@Override
 		public String toString() {
-			return getResponseCode() + "file uploaded successfully";
+			return getResponseCode() + " file uploaded successfully";
 		}
 
 		@Override
@@ -54,12 +54,24 @@ public enum ResponseCode {
 	FILE_FOUND {
 		@Override
 		public String toString() {
-			return getResponseCode() + "file found";
+			return getResponseCode() + " file found";
 		}
 
 		@Override
 		public int getResponseCode() {
 			return 9;
+		}
+	}, 
+	
+	PATH_DONT_EXISTS {
+		@Override
+		public int getResponseCode() {
+			return 8;
+		}
+
+		@Override
+		public String toString() {
+			return getResponseCode() + " error: path don't exists";
 		}
 	};
 	
