@@ -22,7 +22,6 @@ public class ClientThread implements Runnable {
 			outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
 			while (true) {
-				// TODO String clientSentence = inFromClient.readLine();
 				String clientSentence = inFromClient.readUTF();
 				System.out.println("-----------------------\n" + clientSentence + "\n-------------------------------");
 
@@ -30,7 +29,6 @@ public class ClientThread implements Runnable {
 				if (message == null)
 					System.out.println("error to parse command.");
 				else {
-					// TODO outToClient.writeBytes(message + "\n");
 					outToClient.writeUTF(message);
 					outToClient.flush();
 				}
