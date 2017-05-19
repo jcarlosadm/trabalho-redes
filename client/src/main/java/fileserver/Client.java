@@ -31,11 +31,8 @@ public class Client {
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
 			
-			
-			// TODO outToServer.writeBytes("get_public_key\n");
 			outToServer.writeUTF("get_public_key");
 			outToServer.flush();
-			// TODO Protocol.execute(inFromServer.readLine());
 			Protocol.execute(inFromServer.readUTF());
 			
 			while (true) {
@@ -54,7 +51,6 @@ public class Client {
 					continue;
 				}
 
-				// TODO outToServer.writeBytes(formatedMessageToServer + "\n");
 				outToServer.writeUTF(formatedMessageToServer);
 				outToServer.flush();
 
