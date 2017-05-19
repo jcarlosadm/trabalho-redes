@@ -1,4 +1,4 @@
-package fileserver.server;
+package fileserver.cryptography.server;
 
 import java.security.PublicKey;
 

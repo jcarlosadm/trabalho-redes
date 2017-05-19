@@ -4,7 +4,7 @@ public class Protocol {
 	
 	public static void execute(String command) {
 		
-		System.out.println("-------------------\n"+command+"------------------------");
+		System.out.println("-------------------\n"+command+"\n------------------------");
 
 		try {
 			int cod = Integer.parseInt(command.substring(0, command.indexOf(" ")));

@@ -1,6 +1,7 @@
 package fileserver;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,22 +25,28 @@ public class Client {
 			e.printStackTrace();
 			return;
 		}
-		
-		// TODO criar/recuperar par de chaves locais. carlos
 
 		try {
 			BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
 			
-			outToServer.writeBytes("get_public_key\n");
-			Protocol.execute(inFromServer.readLine());
+			
+			// TODO outToServer.writeBytes("get_public_key\n");
+			outToServer.writeUTF("get_public_key");
+			outToServer.flush();
+			// TODO Protocol.execute(inFromServer.readLine());
+			Protocol.execute(inFromServer.readUTF());
 			
 			while (true) {
 				String messageToServer = inFromUser.readLine();
 
 				if (messageToServer.toLowerCase().equals("exit"))
 					break;
+				else if (messageToServer.equals("-help") || messageToServer.equals("help")) {
+					showHelp();
+					continue;
+				}
 				
 				String formatedMessageToServer = InputParser.format(messageToServer);
 				if (formatedMessageToServer == null) {
@@ -47,9 +54,11 @@ public class Client {
 					continue;
 				}
 
-				outToServer.writeBytes(formatedMessageToServer + "\n");
+				// TODO outToServer.writeBytes(formatedMessageToServer + "\n");
+				outToServer.writeUTF(formatedMessageToServer);
+				outToServer.flush();
 
-				String response = inFromServer.readLine();
+				String response = inFromServer.readUTF();
 				Protocol.execute(response);
 			}
 
@@ -62,6 +71,11 @@ public class Client {
 			System.out.println("error to create/manipulate streams");
 			return;
 		}
+	}
+
+	private static void showHelp() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
