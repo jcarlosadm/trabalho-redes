@@ -8,6 +8,9 @@ import java.util.Base64;
 
 import org.apache.commons.io.FileUtils;
 
+import br.com.commons.crypto.KeyPairProxy;
+import fileserver.cryptography.server.ServerKey;
+
 public abstract class InputParser {
 
 	private InputParser() {
@@ -112,12 +115,15 @@ public abstract class InputParser {
 
 	private static String getPassword() throws Exception {
 		Console console = System.console();
+		String password = "";
 		if (console == null) {
 			BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-			return bReader.readLine();
-		}
+			password = bReader.readLine();
+			bReader.close();
+		} else
+			password = String.valueOf(console.readPassword());
 
-		return String.valueOf(console.readPassword());
+		return KeyPairProxy.encryptWithOtherPublicKey(password, ServerKey.getInstance().getPublicKey());
 	}
 
 }
