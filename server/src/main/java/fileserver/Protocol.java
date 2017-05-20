@@ -10,7 +10,7 @@ import fileserver.util.PrintData;
 
 public class Protocol {
 
-	public static String execute(String clientData) {
+	public synchronized static String execute(String clientData) {
 
 		PrintData.print("data from client:", clientData);
 
