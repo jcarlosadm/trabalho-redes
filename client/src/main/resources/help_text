@@ -1,6 +1,32 @@
-test
-ds
-s
-ds
-d
-sds
+example of use:
+
+login carlos
+
+available commands:
+
+register [username]                     : for register a new account on server.
+                                          this command will ask your password.
+
+login [username]                        : for login on server. this command will
+                                          ask your password.
+
+send_file [localpath] [serverpath]      : send file located in localpath and 
+                                          stores this in serverpath on server.
+                                          if localpath don't exists, this will
+                                          get a error.
+
+download_file [serverpath]              : get file located in serverpath on
+                                          server.
+                                          
+create_folder [serverpath]              : create a folder in serverpath on
+                                          server
+
+show_files                              : show files and folders in server
+
+delete_file [serverpath]                : delete file located in serverpath on
+                                          server
+                                          
+delete_folder [serverpath]              : delete folder located in serverpath
+                                          on server
+                                          
+logout                                  : logout on server
