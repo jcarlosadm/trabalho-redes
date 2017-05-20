@@ -17,3 +17,6 @@ hs_err_pid*s
 .project
 /.settings/
 FileSystemClients
+
+*.jks
+clientsPass
