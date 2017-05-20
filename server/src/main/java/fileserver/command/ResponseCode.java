@@ -39,6 +39,18 @@ public enum ResponseCode {
 		}
 	},
 	
+	LOGGED_IN {
+		@Override
+		public int getResponseCode() {
+			return 3;
+		}
+
+		@Override
+		public String toString() {
+			return getResponseCode() + " logged in";
+		}
+	},
+	
 	FILE_UPLOADED_SUCCSESSFULLY {
 		@Override
 		public String toString() {
@@ -72,6 +84,18 @@ public enum ResponseCode {
 		@Override
 		public String toString() {
 			return getResponseCode() + " error: path don't exists";
+		}
+	},
+	
+	PUBLIC_KEY {
+		@Override
+		public int getResponseCode() {
+			return 14;
+		}
+
+		@Override
+		public String toString() {
+			return getResponseCode() + " public key";
 		}
 	};
 	

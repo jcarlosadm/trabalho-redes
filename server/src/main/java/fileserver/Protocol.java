@@ -1,23 +1,31 @@
 package fileserver;
 
 import fileserver.command.Command;
+import fileserver.command.GetPublicKey;
+import fileserver.command.Login;
 import fileserver.command.Register;
+import fileserver.util.PrintData;
 
 public class Protocol {
 
 	public static String execute(String clientData) {
 
-		System.out.println("-------------------\n" + clientData + "------------------------");
+		PrintData.print("data from client:", clientData);
 
 		Command command = null;
 		try {
-			String commandStr = clientData.substring(0, clientData.indexOf("\n"));
+			String commandStr = clientData.split("\n")[0];
 			
 			// TODO implement all protocols. cristiano (implementar por último)
 			
-			if (commandStr.equals("register")) {
+			if (commandStr.equals("register"))
 				command = new Register(clientData);
-			}
+			
+			else if (commandStr.equals("get_public_key"))
+				command = new GetPublicKey(clientData);
+			
+			else if (commandStr.equals("login"))
+				command = new Login(clientData);
 			
 			else {
 				return null;

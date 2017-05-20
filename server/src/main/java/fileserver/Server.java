@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import fileserver.keys.ServerKeys;
+
 public class Server {
 
 	private static final int ACCEPT_ERROR_MAX = 5;
@@ -13,8 +15,14 @@ public class Server {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		System.out.println(WAITING_CONECTTION_MESSAGE + PORT + "...");
-
+		
+		try {
+			ServerKeys.getInstance();
+		} catch (Exception e) {
+			System.out.println("Error to generate cryptography keys. Exiting ...");
+			return;
+		}
+		
 		ServerSocket serverSocket;
 		try {
 			serverSocket = new ServerSocket(PORT);
@@ -23,6 +31,8 @@ public class Server {
 			e.printStackTrace();
 			return;
 		}
+		
+		System.out.println(WAITING_CONECTTION_MESSAGE + PORT + "...");
 
 		int acceptErrorCount = 0;
 		while (true) {
