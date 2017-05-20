@@ -1,11 +1,16 @@
 package fileserver;
 
 import fileserver.command.Command;
+import fileserver.command.CreateFolder;
+import fileserver.command.DeleteFile;
+import fileserver.command.DeleteFolder;
 import fileserver.command.DownloadFile;
 import fileserver.command.GetPublicKey;
 import fileserver.command.Login;
+import fileserver.command.Logout;
 import fileserver.command.Register;
 import fileserver.command.SendFile;
+import fileserver.command.ShowFiles;
 import fileserver.util.PrintData;
 
 public class Protocol {
@@ -17,8 +22,6 @@ public class Protocol {
 		Command command = null;
 		try {
 			String commandStr = clientData.split("\n")[0];
-			
-			// TODO implement all protocols. cristiano (implementar por último)
 			
 			if (commandStr.equals("register"))
 				command = new Register(clientData);
@@ -34,6 +37,21 @@ public class Protocol {
 			
 			else if (commandStr.equals("download_file"))
 				command = new DownloadFile(clientData);
+			
+			else if (commandStr.equals("create_folder"))
+				command = new CreateFolder(clientData);
+			
+			else if (commandStr.equals("show_files"))
+				command = new ShowFiles(clientData);
+			
+			else if (commandStr.equals("delete_file"))
+				command = new DeleteFile(clientData);
+			
+			else if (commandStr.equals("delete_folder"))
+				command = new DeleteFolder(clientData);
+			
+			else if (commandStr.equals("logout"))
+				command = new Logout(clientData);
 			
 			else {
 				return null;
