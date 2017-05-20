@@ -12,7 +12,6 @@ public class DeleteFile extends Command {
 
 	@Override
 	public String run() throws Exception {
-		// TODO Auto-generated method stub
 		if (ClientState.getInstance().isLogged() == false)
 			return ResponseCode.NOT_LOGGED_IN.toString();
 		
