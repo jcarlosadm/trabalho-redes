@@ -87,10 +87,18 @@ public class Protocol {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		
 		while (true) {
-			System.out.print("type a filepath to store this file (uses file separator of your system): ");
-			String path = bufferedReader.readLine();
+			System.out.print("type the filepath to store this file (use file separator from your system): ");
 			
-			String folderpath = path.substring(0, path.lastIndexOf(File.separator));
+			String path = bufferedReader.readLine();
+			String folderpath = null;
+			
+			try{
+				folderpath = path.substring(0, path.lastIndexOf(File.separator));
+			}
+			catch (Exception e) {
+				folderpath = "." + File.separator;
+			}
+			
 			File folder = new File(folderpath);
 			if (!folder.exists() || !folder.isDirectory()) {
 				System.out.print("invalid path. continue? Type \"yes\" or \"no\": ");
