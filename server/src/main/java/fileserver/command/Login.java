@@ -12,7 +12,7 @@ public class Login extends Command {
 	}
 
 	@Override
-	public String run() {
+	public String run() throws Exception {
 		
 		try {
 			String[] lines = clientData.split("\n");

@@ -10,7 +10,7 @@ public class Register extends Command {
 	}
 
 	@Override
-	public String run() {
+	public String run() throws Exception {
 
 		String[] fields = clientData.split("\n");
 

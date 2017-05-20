@@ -16,7 +16,7 @@ public class DownloadFile extends Command {
 	}
 
 	@Override
-	public String run() {
+	public String run() throws Exception {
 		if (ClientState.getInstance().isLogged() == false) {
 			return ResponseCode.NOT_LOGGED_IN.toString();
 		}

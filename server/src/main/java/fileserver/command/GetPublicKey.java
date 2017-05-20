@@ -11,7 +11,7 @@ public class GetPublicKey extends Command {
 	}
 
 	@Override
-	public String run() {
+	public String run() throws Exception {
 		String data = ResponseCode.PUBLIC_KEY.toString() + "\n\n";
 		
 		try {

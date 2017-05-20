@@ -11,6 +11,6 @@ public abstract class Command {
 	/**
 	 * @return response to client
 	 */
-	public abstract String run();
+	public abstract String run() throws Exception;
 	
 }

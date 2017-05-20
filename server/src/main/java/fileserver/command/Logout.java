@@ -8,7 +8,7 @@ public class Logout extends Command {
 	}
 
 	@Override
-	public String run() {
+	public String run() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
