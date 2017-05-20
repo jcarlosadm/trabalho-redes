@@ -1,5 +1,7 @@
 package fileserver.command;
 
+import fileserver.util.ClientState;
+
 public class Logout extends Command {
 
 	public Logout(String clientData) {
@@ -8,8 +10,12 @@ public class Logout extends Command {
 
 	@Override
 	public String run() throws Exception {
-		// TODO implement
-		return null;
+		if (ClientState.getInstance().isLogged() == false)
+			return ResponseCode.NOT_LOGGED_IN.toString();
+		
+		ClientState.getInstance().logout();
+		
+		return ResponseCode.LOGOUT_SUCCESSFUL.toString();
 	}
 
 }
