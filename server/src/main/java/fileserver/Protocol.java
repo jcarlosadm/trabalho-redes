@@ -1,9 +1,11 @@
 package fileserver;
 
 import fileserver.command.Command;
+import fileserver.command.DownloadFile;
 import fileserver.command.GetPublicKey;
 import fileserver.command.Login;
 import fileserver.command.Register;
+import fileserver.command.SendFile;
 import fileserver.util.PrintData;
 
 public class Protocol {
@@ -26,6 +28,12 @@ public class Protocol {
 			
 			else if (commandStr.equals("login"))
 				command = new Login(clientData);
+			
+			else if (commandStr.equals("send_file"))
+				command = new SendFile(clientData);
+			
+			else if (commandStr.equals("download_file"))
+				command = new DownloadFile(clientData);
 			
 			else {
 				return null;

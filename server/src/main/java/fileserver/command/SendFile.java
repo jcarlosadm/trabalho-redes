@@ -1,9 +1,9 @@
 package fileserver.command;
 
-import java.awt.image.BufferedImageFilter;
-import java.awt.print.Printable;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.util.Base64;
+
+import org.apache.commons.io.FileUtils;
 
 public class SendFile extends Command {
 
@@ -13,21 +13,23 @@ public class SendFile extends Command {
 
 	@Override
 	public String run() {
-		String[] fields = clientData.split("[\\s]+");
-		String filePath = fields[2];
-		String fileString = fields[3];
-			
-		byte[] fileBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(fileString);
-				
+		String[] fields = clientData.split("\n");
+		String filePath = fields[1].substring(fields[1].indexOf(":") + 1).trim();
+		
+		String folderPath = filePath.substring(0, filePath.lastIndexOf("/"));
+		File folder = new File(folderPath);
+		if (!folder.exists() || !folder.isDirectory()) {
+			return ResponseCode.PATH_DONT_EXISTS.toString();
+		}
+		
 		File file = new File(filePath);
 		
 		try{
-			FileOutputStream fop = new FileOutputStream(file);
-			fop.write(fileBytes);
-			fop.flush();
-			fop.close();
+			byte[] fileBytes = Base64.getDecoder().decode(fields[3]);
+			FileUtils.writeByteArrayToFile(file, fileBytes);
 		}
 		catch (Exception e) {
+			System.out.println("Error to save file");
 			return null;
 		}
 		
