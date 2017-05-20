@@ -3,6 +3,8 @@ package fileserver;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -12,6 +14,7 @@ import fileserver.parserentry.Protocol;
 
 public class Client {
 
+	private static final String HELP_FILE_LOCATION = "src/main/resources/help_text";
 	private static final int HOST_PORT = 6789;
 	private static final String HOST_IP = "localhost";
 
@@ -69,9 +72,15 @@ public class Client {
 		}
 	}
 
-	private static void showHelp() {
-		// TODO Auto-generated method stub
+	private static void showHelp() throws Exception {
+		BufferedReader bReader = new BufferedReader(new FileReader(new File(HELP_FILE_LOCATION)));
 		
+		String line = "";
+		while((line = bReader.readLine()) != null)
+			System.out.println(line);
+		System.out.println("\n");
+		
+		bReader.close();
 	}
 
 }
