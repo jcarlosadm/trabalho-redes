@@ -58,4 +58,16 @@ public class ClientsPass {
 				
 		return null;
 	}
+	
+	public synchronized boolean userExists(String name) throws Exception {
+		Properties properties = new Properties();
+		File file = new File(this.clientsPassFilePath);
+		
+		if (file.exists()) {
+			properties.load(new FileReader(file));
+			return properties.containsKey(name);
+		}
+		
+		return false;
+	}
 }

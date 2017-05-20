@@ -86,7 +86,7 @@ public enum ResponseCode {
 		}
 	},
 	
-	FILE_UPLOADED_SUCCESSFULLY {
+	NOT_LOGGED_IN {
 		@Override
 		public int getResponseCode() {
 			return 7;
@@ -94,7 +94,7 @@ public enum ResponseCode {
 
 		@Override
 		public String toString() {
-			return getResponseCode() + " file uploaded successfully";
+			return getResponseCode() + " error: not logged in";
 		}
 	},
 

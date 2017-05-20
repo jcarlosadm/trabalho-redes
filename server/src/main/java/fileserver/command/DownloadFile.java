@@ -6,6 +6,9 @@ import java.util.Base64;
 
 import org.apache.commons.io.FileUtils;
 
+import fileserver.util.ClientState;
+import fileserver.util.FolderManager;
+
 public class DownloadFile extends Command {
 
 	public DownloadFile(String clientData) {
@@ -14,12 +17,17 @@ public class DownloadFile extends Command {
 
 	@Override
 	public String run() {
+		if (ClientState.getInstance().isLogged() == false) {
+			return ResponseCode.NOT_LOGGED_IN.toString();
+		}
+		
 		// split by line break. be clear
 		String[] fields = clientData.split("\n");
 		// get the second line by index 1
 		String filePath = fields[1];
 		// get the value after ':'. see protocol
 		filePath = filePath.substring(filePath.indexOf(":") + 1).trim();
+		filePath = FolderManager.getInstance().getClientBasicPath() + "/" + filePath;
 
 		File file = new File(filePath);
 		// if file don't exists, return message path don't exists
