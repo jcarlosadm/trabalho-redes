@@ -65,8 +65,6 @@ public abstract class InputParser {
 			return null;
 		}
 
-		System.out.println("-------------------\n" + data + "\n----------------------");
-
 		return data;
 	}
 
@@ -116,10 +114,10 @@ public abstract class InputParser {
 	private static String getPassword() throws Exception {
 		Console console = System.console();
 		String password = "";
+		System.out.print("type password and click ENTER: ");
 		if (console == null) {
 			BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
 			password = bReader.readLine();
-			bReader.close();
 		} else
 			password = String.valueOf(console.readPassword());
 
