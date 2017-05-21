@@ -23,14 +23,14 @@ public class Protocol {
 			int cod = Integer.parseInt(command.substring(0, command.indexOf(" ")));
 
 			String firstLine = command.split("\n")[0];
-			System.out.println("message from server: " + firstLine.substring(firstLine.indexOf(" ") + 1));
+			System.out.println("message from server:\n" + firstLine.substring(firstLine.indexOf(" ") + 1));
 
 			switch (cod) {
 			case 9:
 				getFile(getData(command));
 				break;
 			case 11:
-				System.out.println(getData(command));
+				System.out.println(getFileTree(command));
 				break;
 			case 14:
 				setServerKey(getData(command));
@@ -66,6 +66,21 @@ public class Protocol {
 			data = lines[index + 1];
 
 		return data;
+	}
+	
+	private static String getFileTree(String command) throws Exception {
+		String[] lines = command.split("\n");
+		int index = 0;
+		String fileTree = "";
+		while (lines[index].trim().isEmpty() == false && index < lines.length)
+			++index;
+
+		while ((index + 1) < lines.length){
+			fileTree += lines[index + 1] + "\n";
+			++index;
+		}
+
+		return fileTree;
 	}
 
 	private static void getFile(String data) throws Exception {

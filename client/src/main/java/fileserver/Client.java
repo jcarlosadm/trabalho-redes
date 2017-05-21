@@ -39,10 +39,11 @@ public class Client {
 			outToServer.writeUTF("get_public_key");
 			outToServer.flush();
 			Protocol.execute(inFromServer.readUTF());
-
+			
+			System.out.println("=================================\n");
+			System.out.println("for help, type: -help");
+			
 			while (true) {
-				System.out.println("=================================\n");
-
 				System.out.print("type command: ");
 				String messageToServer = inFromUser.readLine();
 
@@ -66,6 +67,8 @@ public class Client {
 
 				String response = inFromServer.readUTF();
 				Protocol.execute(response);
+				
+				System.out.println("=================================\n");
 			}
 
 			clientSocket.close();
@@ -75,7 +78,7 @@ public class Client {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("error to create/manipulate streams");
+			System.out.println("error in create/manipulate streams");
 			return;
 		}
 	}
