@@ -1,7 +1,6 @@
 package fileserver;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,12 +35,20 @@ public class Client {
 		try {
 			BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
+			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 			PrintData.print("message to server:", "get_public_key");
-			outToServer.writeUTF("get_public_key");
-			outToServer.flush();
-			Protocol.execute(inFromServer.readUTF());
+			outToServer.writeBytes("get_public_key\n");
+			outToServer.writeBytes("end_t\n");
+			
+			String response = "";
+			String line = "";
+			while((line = inFromServer.readLine()).equals("end_t") == false)
+				response += line + "\n";
+			
+			response = response.substring(0, response.length() -1);
+				
+			Protocol.execute(response);
 
 			System.out.println("=================================\n");
 			System.out.println("for help, type: -help");
@@ -65,10 +72,18 @@ public class Client {
 
 				PrintData.print("message to server:", formatedMessageToServer);
 
-				outToServer.writeUTF(formatedMessageToServer);
-				outToServer.flush();
+				// TODO modify
+				outToServer.writeBytes(formatedMessageToServer + "\n");
+				outToServer.writeBytes("end_t\n");
+				
 
-				String response = inFromServer.readUTF();
+				response = "";
+				line = "";
+				while ((line = inFromServer.readLine()).equals("end_t") == false)
+					response += line + "\n";
+				
+				response = response.substring(0, response.length() -1);
+				
 				Protocol.execute(response);
 
 				System.out.println("=================================\n");
