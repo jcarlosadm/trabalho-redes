@@ -27,6 +27,6 @@ Primeiro, crie um arquivo **general.config**. Copie o conteúdo do arquivo **gen
 
 No eclipse, basta executar o método **main** em **fileserver.Client**, localizado na pasta **src/main/java**.
 
-Se estiver com o jar gerado, basta executar o jar. É necessá
+Se estiver com o jar gerado, basta executar o jar. É necessário ter o arquivo **general.config** na mesma pasta.
 
 Um aviso se for usar no eclipse: só há mascaramento de senha no terminal/cmd. Se usar o programa usando o console do eclipse, senhas digitadas serão mostradas na tela.
