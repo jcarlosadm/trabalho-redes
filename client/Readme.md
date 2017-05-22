@@ -21,6 +21,8 @@ mvn install
 
 Botão direito no projeto, **Run As > Maven Install**.
 
+O arquivo jar estará na pasta **target** (use o arquivo que termina em **jar-with-dependencies.jar**).
+
 ## Uso
 
 Primeiro, crie um arquivo **general.config**. Copie o conteúdo do arquivo **general.config.model** e cole em **general.config**, e mude as configurações nesse último arquivo. As configurações são o IP e a porta do host.
