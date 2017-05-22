@@ -31,6 +31,6 @@ delete_folder [serverpath]              : delete folder located in serverpath
                                           
 logout                                  : logout on server
 
-help									: show this message
+help                                    : show this message
 
-exit									: exits from this program
+exit                                    : exits from this program

@@ -3,8 +3,6 @@ package fileserver;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -16,18 +14,18 @@ import fileserver.util.PrintData;
 
 public class Client {
 
-	private static final String HELP_FILE_LOCATION = "src/main/resources/help_text";
+	private static final String HELP_FILE_LOCATION = "/help_text";
 
 	public static void main(String[] args) {
 
 		String hostIp = "";
 		int hostPort = 0;
-		
+
 		Socket clientSocket;
 		try {
 			hostIp = PropertiesManager.getProperty("host.ip");
 			hostPort = (int) Integer.parseInt(PropertiesManager.getProperty("host.port"));
-			
+
 			clientSocket = new Socket(hostIp, hostPort);
 		} catch (IOException e) {
 			System.out.println("error to create socket on port " + hostPort + " on address " + hostIp);
@@ -44,10 +42,10 @@ public class Client {
 			outToServer.writeUTF("get_public_key");
 			outToServer.flush();
 			Protocol.execute(inFromServer.readUTF());
-			
+
 			System.out.println("=================================\n");
 			System.out.println("for help, type: -help");
-			
+
 			while (true) {
 				System.out.print("type command: ");
 				String messageToServer = inFromUser.readLine();
@@ -72,7 +70,7 @@ public class Client {
 
 				String response = inFromServer.readUTF();
 				Protocol.execute(response);
-				
+
 				System.out.println("=================================\n");
 			}
 
@@ -89,7 +87,9 @@ public class Client {
 	}
 
 	private static void showHelp() throws Exception {
-		BufferedReader bReader = new BufferedReader(new FileReader(new File(HELP_FILE_LOCATION)));
+
+		BufferedReader bReader = new BufferedReader(
+				new InputStreamReader(Client.class.getResourceAsStream(HELP_FILE_LOCATION)));
 
 		String line = "";
 		while ((line = bReader.readLine()) != null)
