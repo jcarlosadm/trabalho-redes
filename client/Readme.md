@@ -6,7 +6,7 @@
 
 ## Importação
 
-Para importar esse projeto no eclipse, basta escolher **File > Import ** e selecionar importar como projeto Maven. Depois navegue até a pasta desse projeto e complete a importação.
+Para importar esse projeto no eclipse, basta escolher ** File > Import ** e selecionar importar como projeto Maven. Depois navegue até a pasta desse projeto e complete a importação.
 
 Para gerar o jar, pode-se usar um comando maven no terminal ou no eclipse:
 
