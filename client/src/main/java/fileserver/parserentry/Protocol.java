@@ -59,8 +59,12 @@ public class Protocol {
 		String[] lines = command.split("\n");
 		int index = 0;
 		String data = "";
-		while (lines[index].trim().isEmpty() == false && index < lines.length)
+		while (lines[index].trim().isEmpty() == false && index < lines.length) {
 			++index;
+			
+			if (index >= lines.length)
+				break;
+		}
 
 		if ((index + 1) < lines.length)
 			data = lines[index + 1];
@@ -72,8 +76,12 @@ public class Protocol {
 		String[] lines = command.split("\n");
 		int index = 0;
 		String fileTree = "";
-		while (lines[index].trim().isEmpty() == false && index < lines.length)
+		while (lines[index].trim().isEmpty() == false && index < lines.length) {
 			++index;
+			
+			if (index >= lines.length)
+				break;
+		}
 
 		while ((index + 1) < lines.length){
 			fileTree += lines[index + 1] + "\n";
