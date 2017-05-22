@@ -1,8 +1,9 @@
 package fileserver;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 import fileserver.util.PrintData;
@@ -17,16 +18,27 @@ public class ClientThread implements Runnable {
 
 	@Override
 	public void run() {
-		DataInputStream inFromClient = null;
+		BufferedReader inFromClient = null;
 		DataOutputStream outToClient = null;
 		try {
-			inFromClient = new DataInputStream(connectionSocket.getInputStream());
+			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
 			while (true) {
 				System.out.println("======================================");
-				
-				String clientSentence = inFromClient.readUTF();
+
+				String clientSentence = "";
+				String line = "";
+
+				try {
+					while ((line = inFromClient.readLine()).equals("end_t") == false)
+						clientSentence += line + "\n";
+				} catch (Exception e) {
+					System.out.println("client disconnected. closing thread.");
+					return;
+				}
+
+				clientSentence = clientSentence.substring(0, clientSentence.length() - 1);
 
 				String message = Protocol.execute(clientSentence);
 				if (message == null)
@@ -34,8 +46,8 @@ public class ClientThread implements Runnable {
 				else {
 					PrintData.print("message to client", message);
 
-					outToClient.writeUTF(message);
-					outToClient.flush();
+					outToClient.writeBytes(message + "\n");
+					outToClient.writeBytes("end_t\n");
 				}
 			}
 		} catch (IOException e) {
