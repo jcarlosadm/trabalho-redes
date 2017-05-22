@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import br.com.commons.properties.PropertiesManager;
 import fileserver.parserentry.InputParser;
 import fileserver.parserentry.Protocol;
 import fileserver.util.PrintData;
@@ -16,16 +17,20 @@ import fileserver.util.PrintData;
 public class Client {
 
 	private static final String HELP_FILE_LOCATION = "src/main/resources/help_text";
-	private static final int HOST_PORT = 6789;
-	private static final String HOST_IP = "localhost";
 
 	public static void main(String[] args) {
 
+		String hostIp = "";
+		int hostPort = 0;
+		
 		Socket clientSocket;
 		try {
-			clientSocket = new Socket(HOST_IP, HOST_PORT);
+			hostIp = PropertiesManager.getProperty("host.ip");
+			hostPort = (int) Integer.parseInt(PropertiesManager.getProperty("host.port"));
+			
+			clientSocket = new Socket(hostIp, hostPort);
 		} catch (IOException e) {
-			System.out.println("error to create socket on port " + HOST_PORT + " on address " + HOST_IP);
+			System.out.println("error to create socket on port " + hostPort + " on address " + hostIp);
 			e.printStackTrace();
 			return;
 		}
