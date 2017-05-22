@@ -1,3 +1,3 @@
-##Client
+## Projeto da disciplina de Redes 1
 
-execute from terminal, not in IDE. If you execute this from IDE (like eclipse), your password on login/register command will be visible!
+Esse repositório contém os dois programas de um servidor de arquivos: o programa cliente e o programa servidor. As instruções de cada um estão em suas pastas correspondentes.
