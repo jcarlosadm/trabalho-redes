@@ -20,3 +20,5 @@ FileSystemClients
 
 *.jks
 clientsPass
+
+general.config
